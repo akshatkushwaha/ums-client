@@ -1,0 +1,12 @@
+<div class="mx-auto container mt-24">
+  <div class="text-center pb-10">
+    <h1 class="text-4xl font-bold">Departments</h1>
+  </div>
+  <div class="grid grid-cols-3 gap-10">
+    <div *ngFor="let department of departments">
+      <app-department-list-component
+        [department]="department"
+      ></app-department-list-component>
+    </div>
+  </div>
+</div>

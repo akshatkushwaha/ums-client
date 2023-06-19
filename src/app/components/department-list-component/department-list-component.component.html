@@ -1,0 +1,18 @@
+<a [href]="department.id">
+  <div
+    class="h-40 rounded-lg grid grid-cols-3 gap-4 border-2 border-gray-600 cursor-pointer hover:scale-110 transform transition duration-500"
+  >
+    <div class="col-span-1 rounded overflow-hidden">
+      <img
+        src="https://3.imimg.com/data3/IV/SY/MY-9739567/electronics-telecommunication-engineering-500x500.jpg"
+        alt="department image"
+        class="h-full w-full object-cover"
+      />
+    </div>
+    <div class="col-span-2 flex flex-col justify-around">
+      <h1 class="text-xl font-bold text-sky-800">{{ department.name }}</h1>
+      <h2 class="text-xl font-bold">{{ department.abbrieviation }}</h2>
+      <h4><span>HOD: </span>{{ department.hodId }}</h4>
+    </div>
+  </div>
+</a>
