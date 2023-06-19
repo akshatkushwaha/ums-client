@@ -16,16 +16,6 @@ export class DepartmentDetailsComponent {
 
   constructor(private http: HttpClient) {
     this.id = 2;
-    this.department = this.getDepartment();
-    console.log(this.department);
-  }
-
-  getDepartment(): Department {
-    // const departmentApi = new DepartmentAPI();
-    // return departmentApi.getDepartment(this.http, this.id);
-    const api = new API();
-    console.log(api.getCallWithId('department', this.http, this.id));
-
-    return this.department;
+    this.department = new Department(0, '', '', 0, '');
   }
 }
