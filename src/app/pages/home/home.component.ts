@@ -10,16 +10,17 @@ import { DepartmentAPI } from 'src/app/shared/departmentApi';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   departments: Department[];
 
-  constructor(private http: HttpClient) {
-    this.departments = this.getDepartments();
-    console.log(this.departments);
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.getDepartments();
   }
 
-  getDepartments(): Department[] {
+  getDepartments() {
     const departmentApi = new DepartmentAPI();
-    return departmentApi.getDepartments(this.http);
+    this.departments = departmentApi.getDepartments(this.http);
   }
 }
