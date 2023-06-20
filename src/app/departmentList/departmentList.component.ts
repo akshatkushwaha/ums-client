@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Department } from 'src/app/models/department';
-
-import { DepartmentAPI } from 'src/app/shared/departmentApi';
+import { Department } from '../models/department';
+import { DepartmentAPI } from '../shared/departmentApi';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-department-list',
+  templateUrl: './departmentList.component.html',
 })
-export class HomeComponent implements OnInit {
+export class DepartmentListComponent implements OnInit {
   departments: Department[];
 
   constructor(private http: HttpClient) {}

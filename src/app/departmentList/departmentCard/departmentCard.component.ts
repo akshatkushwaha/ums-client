@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Department } from 'src/app/models/department';
 
 @Component({
-  selector: 'app-department-list-component',
-  templateUrl: './department-list-component.component.html',
-  styleUrls: ['./department-list-component.component.css'],
+  selector: 'app-department-card',
+  templateUrl: './departmentCard.component.html',
 })
-export class DepartmentListComponentComponent {
+export class DepartmentCardComponent {
   @Input() department: Department = new Department(0, '', '', 0, '');
 
   constructor() {}
