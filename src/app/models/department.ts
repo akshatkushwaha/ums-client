@@ -4,18 +4,21 @@ export class Department {
   abbreviation: string;
   hodId: number;
   description: string;
+  imageURL: string;
 
   constructor(
-    id: number,
-    name: string,
-    abbreviation: string,
-    hodId: number,
-    description: string
+    id?: number,
+    name?: string,
+    abbreviation?: string,
+    hodId?: number,
+    description?: string,
+    imageURL?: string
   ) {
-    this.id = id;
-    this.name = name;
-    this.abbreviation = abbreviation;
-    this.hodId = hodId;
-    this.description = description;
+    this.id = id || 0;
+    this.name = name || '';
+    this.abbreviation = abbreviation || '';
+    this.hodId = hodId || 0;
+    this.description = description || '';
+    this.imageURL = imageURL || '';
   }
 }

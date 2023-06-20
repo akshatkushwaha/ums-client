@@ -15,7 +15,7 @@ import { DepartmentDetailsComponent } from './departmentDetails/departmentDetail
 import { StudentCardComponent } from './departmentDetails/studentCard/studentCard.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/departments', pathMatch: 'full' },
   { path: 'departments', component: DepartmentListComponent },
   { path: 'department/:id', component: DepartmentDetailsComponent },
 ];

@@ -1,5 +1,47 @@
-<div class="mx-auto container mt-24">
+<div
+  *ngIf="department != undefined && hod != undefined"
+  class="mx-auto container mt-24"
+>
   <div class="text-center pb-10">
     <h1 class="text-4xl font-bold">Department Details</h1>
+  </div>
+  <div class="bg-gray-200 rounded-2xl p-5">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold">{{ department.name }}</h1>
+    </div>
+    <div class="grid grid-cols-6 gap-4 pt-5">
+      <div class="flex flex-col col-span-2">
+        <img
+          class="w-96 h-96 rounded-full mx-auto"
+          [src]="
+            hod.profilePictureURL ||
+            'https://eu.ui-avatars.com/api/?name=John+Doe&size=250'
+          "
+          [alt]="department.name"
+        />
+        <h1 class="text-center text-xl font-bold pt-5">
+          {{ hod.firstName }} {{ hod.lastName }}
+        </h1>
+        <h1 class="text-center text-xl font-bold">{{ hod.email }}</h1>
+        <h1 class="text-center text-xl font-bold">
+          {{ hod.phoneNumber }}
+        </h1>
+      </div>
+      <div class="flex flex-col col-span-3">
+        <div class="flex flex-row pt-4">
+          <h1 class="text-xl font-bold pr-4">Department Code :</h1>
+          <h1 class="text-xl font-bold pr-4">{{ department.abbreviation }}</h1>
+        </div>
+        <div class="flex flex-row pt-4">
+          <h1 class="text-xl font-bold pr-4">Total Subjects :</h1>
+        </div>
+        <div class="flex flex-row pt-4">
+          <h1 class="text-xl font-bold pr-4">Enrolled Students :</h1>
+        </div>
+        <div class="flex flex-row pt-4">
+          <h1 class="text-xl font-bold pr-4">Description :</h1>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

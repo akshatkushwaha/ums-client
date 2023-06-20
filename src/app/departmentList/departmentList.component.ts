@@ -17,8 +17,12 @@ export class DepartmentListComponent implements OnInit {
     this.getDepartments();
   }
 
-  getDepartments() {
+  async getDepartments() {
     const departmentApi = new DepartmentAPI();
-    this.departments = departmentApi.getDepartments(this.http);
+    await departmentApi
+      .getDepartments(this.http)
+      .then((response: Department[]) => {
+        this.departments = response;
+      });
   }
 }

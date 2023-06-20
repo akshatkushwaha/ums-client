@@ -6,4 +6,12 @@ export class API {
   public getCall(path: string, http: HttpClient) {
     return http.get(`${this.API_URL}/${path}`);
   }
+
+  public getCallWithQuery(path: string, http: HttpClient, query: string) {
+    return http.get(`${this.API_URL}/${path}?${query}`);
+  }
+
+  public getCallById(path: string, http: HttpClient, id: number) {
+    return http.get(`${this.API_URL}/${path}/${id}`);
+  }
 }
