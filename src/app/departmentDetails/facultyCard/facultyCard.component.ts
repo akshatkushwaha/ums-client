@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-faculty-card',
   templateUrl: './facultyCard.component.html',
 })
-export class StudentCardComponent implements OnInit {
+export class FacultyCardComponent implements OnInit {
   @Input() student: any;
 
   constructor() {}

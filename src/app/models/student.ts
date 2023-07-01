@@ -1,4 +1,4 @@
-export class Faculty {
+export class Student {
   constructor(
     public id: number,
     public firstName: string,
@@ -10,7 +10,7 @@ export class Faculty {
     public addressId: number,
     public dateOfBirth: Date,
     public profilePictureId: number,
-    public employeeId: string,
+    public rollNumber: string,
     public departmentId: number
   ) {}
 }

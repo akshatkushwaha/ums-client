@@ -1,1 +1,49 @@
-<h1>Student Card</h1>
+<div class="rounded-lg bg-slate-100 my-1 px-4 py-2 grid grid-cols-12 gap-4">
+  <div class="col-span-2">
+    <div class="flex flex-row items-center justify-around">
+      <h1 class="text-2xl">{{ index + 1 }}</h1>
+      <img
+        src="http://localhost:8080/api/v1/file/{{ student.profilePictureId }}"
+        alt="student image"
+        class="rounded-full h-28 w-28"
+      />
+    </div>
+  </div>
+  <div class="col-span-3">
+    <div class="flex flex-col">
+      <h1 class="text-2xl font-bold">
+        {{ student.firstName }} {{ student.middleName }} {{ student.lastName }}
+      </h1>
+      <h1 class="text-xl">{{ student.email }}</h1>
+      <h1 class="text-xl">{{ student.phoneNumber }}</h1>
+      <h1 class="text-xl">{{ student.gender }}</h1>
+    </div>
+  </div>
+  <div class="col-span-2">
+    <div class="h-full flex flex-col justify-center">
+      <h1 class="text-xl font-bold">{{ student.rollNumber }}</h1>
+    </div>
+  </div>
+  <div class="col-span-1">
+    <div class="h-full flex flex-col justify-center">
+      <h1 class="text-xl font-bold">3<sup>rd</sup> Year</h1>
+    </div>
+  </div>
+  <div class="col-span-1">
+    <div class="h-full flex flex-col justify-center">
+      <h1 class="text-xl font-bold">
+        7.21 <span class="font-normal">CGPA</span>
+      </h1>
+    </div>
+  </div>
+  <div class="col-span-1">
+    <div class="h-full flex flex-col justify-center">
+      <button
+        routerLink="/admin/create/student/{{ student.id }}"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fit-content"
+      >
+        Edit
+      </button>
+    </div>
+  </div>
+</div>

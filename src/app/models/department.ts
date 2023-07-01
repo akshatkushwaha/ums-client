@@ -1,24 +1,10 @@
 export class Department {
-  id: number;
-  name: string;
-  abbreviation: string;
-  hodId: number;
-  description: string;
-  imageURL: string;
-
   constructor(
-    id?: number,
-    name?: string,
-    abbreviation?: string,
-    hodId?: number,
-    description?: string,
-    imageURL?: string
-  ) {
-    this.id = id || 0;
-    this.name = name || '';
-    this.abbreviation = abbreviation || '';
-    this.hodId = hodId || 0;
-    this.description = description || '';
-    this.imageURL = imageURL || '';
-  }
+    public id: number,
+    public name: string,
+    public abbreviation: string,
+    public hodId: number,
+    public description: string,
+    public imageId: number
+  ) {}
 }

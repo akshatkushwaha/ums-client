@@ -4,7 +4,7 @@
   >
     <div class="col-span-1 rounded overflow-hidden">
       <img
-        src="https://3.imimg.com/data3/IV/SY/MY-9739567/electronics-telecommunication-engineering-500x500.jpg"
+        src="http://localhost:8080/api/v1/file/{{ department.imageId }}"
         alt="department image"
         class="h-full w-full object-cover"
       />
@@ -12,7 +12,10 @@
     <div class="col-span-2 flex flex-col justify-around">
       <h1 class="text-xl font-bold text-sky-800">{{ department.name }}</h1>
       <h2 class="text-xl font-bold">{{ department.abbreviation }}</h2>
-      <h4><span>HOD: </span>{{ department.hodId }}</h4>
+      <h4 class="text-xl font-bold">
+        <span>HOD: </span
+        >{{ hod.firstName + " " + hod.middleName + " " + hod.lastName }}
+      </h4>
     </div>
   </div>
 </a>
