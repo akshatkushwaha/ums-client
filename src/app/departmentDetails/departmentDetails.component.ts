@@ -58,7 +58,7 @@ export class DepartmentDetailsComponent implements OnInit {
       });
   }
 
-  async getFaculty() {}
+  async getFacultys() {}
 
   async getStudents() {
     await this.studentAPI
@@ -80,7 +80,7 @@ export class DepartmentDetailsComponent implements OnInit {
     } else if (tab === 'subjects') {
       this.getSubjects();
     } else if (tab === 'faculty') {
-      this.getFaculty();
+      this.getFacultys();
     }
   }
 }
