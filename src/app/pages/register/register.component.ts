@@ -7,20 +7,23 @@ import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'app-login',
-	templateUrl: './login.component.html',
+	selector: 'app-register',
+	templateUrl: './register.component.html',
 })
-export class LoginComponent implements OnInit {
-	title = 'Login';
+export class RegisterComponent implements OnInit {
+	Title = 'Register';
 	username: string;
 	password: string;
+	firstName: string;
+	lastName: string;
+	role: string;
 	showPassword: boolean = false;
 
 	private authAPI: AuthAPI = new AuthAPI();
 
 	constructor(private https: HttpClient, private router: Router) {}
 
-	ngOnInit() {}
+	ngOnInit(): void {}
 
 	encryptPassword(password: string): string {
 		try {
@@ -31,16 +34,21 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
-	async login() {
+	async register() {
+		this.role = 'ADMIN';
+
 		const encryptedPassword = this.encryptPassword(this.password);
 
 		const requestBody = {
 			username: this.username,
 			password: encryptedPassword,
+			firstName: this.firstName,
+			lastName: this.lastName,
+			role: this.role,
 		};
 
 		await this.authAPI
-			.login(this.https, requestBody)
+			.register(this.https, requestBody)
 			.then((response: any) => {
 				// save response to cookies
 				document.cookie = `jwt=${
@@ -58,6 +66,10 @@ export class LoginComponent implements OnInit {
 
 		this.username = '';
 		this.password = '';
+		this.firstName = '';
+		this.lastName = '';
+
+		alert('Register success!');
 
 		this.router.navigate(['/departments']);
 	}

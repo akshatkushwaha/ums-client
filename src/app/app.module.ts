@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { PageNotFoundComponent } from './pages/PageNotFound/pageNotFound.component';
 
 import { DepartmentListComponent } from './departmentList/departmentList.component';
@@ -24,49 +25,56 @@ import { CreateDepartmentComponent } from './ADMIN/department/createDepartment.c
 import { CreateFacultyComponent } from './ADMIN/faculty/createFaculty.component';
 import { CreateStudentComponent } from './ADMIN/student/createStudent.component';
 import { CreateSubjectComponent } from './ADMIN/subject/createSubject.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/departments', pathMatch: 'full' },
-  { path: 'departments', component: DepartmentListComponent },
-  { path: 'department/:id', component: DepartmentDetailsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'admin/create/department', component: CreateDepartmentComponent },
-  { path: 'admin/create/department/:id', component: CreateDepartmentComponent },
-  { path: 'admin/create/faculty', component: CreateFacultyComponent },
-  { path: 'admin/create/faculty/:id', component: CreateFacultyComponent },
-  { path: 'admin/create/student', component: CreateStudentComponent },
-  { path: 'admin/create/student/:id', component: CreateStudentComponent },
-  { path: 'admin/create/subject', component: CreateSubjectComponent },
-  { path: 'admin/create/subject/:id', component: CreateSubjectComponent },
-  { path: '**', component: PageNotFoundComponent },
+	{ path: '', redirectTo: '/departments', pathMatch: 'full' },
+	{ path: 'departments', component: DepartmentListComponent },
+	{ path: 'department/:id', component: DepartmentDetailsComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'register', component: RegisterComponent },
+	{ path: 'admin/create/department', component: CreateDepartmentComponent },
+	{
+		path: 'admin/create/department/:id',
+		component: CreateDepartmentComponent,
+	},
+	{ path: 'admin/create/faculty', component: CreateFacultyComponent },
+	{ path: 'admin/create/faculty/:id', component: CreateFacultyComponent },
+	{ path: 'admin/create/student', component: CreateStudentComponent },
+	{ path: 'admin/create/student/:id', component: CreateStudentComponent },
+	{ path: 'admin/create/subject', component: CreateSubjectComponent },
+	{ path: 'admin/create/subject/:id', component: CreateSubjectComponent },
+	{ path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    DepartmentListComponent,
-    DepartmentCardComponent,
-    DepartmentDetailsComponent,
-    StudentCardComponent,
-    FacultyCardComponent,
-    SubjectCardComponent,
-    CreateDepartmentComponent,
-    CreateFacultyComponent,
-    CreateStudentComponent,
-    CreateSubjectComponent,
-    LoginComponent,
-    PageNotFoundComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    FormsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		NavbarComponent,
+		HomeComponent,
+		DepartmentListComponent,
+		DepartmentCardComponent,
+		DepartmentDetailsComponent,
+		StudentCardComponent,
+		FacultyCardComponent,
+		SubjectCardComponent,
+		CreateDepartmentComponent,
+		CreateFacultyComponent,
+		CreateStudentComponent,
+		CreateSubjectComponent,
+		LoginComponent,
+		RegisterComponent,
+		PageNotFoundComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		RouterModule.forRoot(routes),
+		FormsModule,
+		BrowserAnimationsModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

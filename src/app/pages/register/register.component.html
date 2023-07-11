@@ -6,9 +6,39 @@
 			<h1
 				class="text-2xl font-bold leading-tight tracking-tight text-gray-900 py-4 text-center"
 			>
-				Sign in to your account
+				Register
 			</h1>
 			<form class="space-y-4">
+				<div>
+					<label
+						for="fristname"
+						class="block mb-2 text-sm font-medium text-gray-900"
+					>
+						First Name
+					</label>
+					<input
+						type="text"
+						name="fristname"
+						id="firstname"
+						[(ngModel)]="firstName"
+						class="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg"
+					/>
+				</div>
+				<div>
+					<label
+						for="lastname"
+						class="block mb-2 text-sm font-medium text-gray-900"
+					>
+						Last Name
+					</label>
+					<input
+						type="text"
+						name="lastname"
+						id="lastname"
+						[(ngModel)]="lastName"
+						class="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg"
+					/>
+				</div>
 				<div>
 					<label
 						for="email"
@@ -54,38 +84,27 @@
 						class="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg"
 					/>
 				</div>
-				<div class="flex flex-row items-center justify-between">
-					<div>
-						<input
-							type="checkbox"
-							class="w-4 h-4 border border-gray-300 rounded"
-						/>
-						<label> Remember me</label>
-					</div>
-					<a href="" class="text-sm text-blue-600 font-semibold"
-						>Forget Password</a
-					>
-				</div>
 				<button
 					class="rounded-lg bg-blue-950 hover:bg-blue-900 w-full py-2 text-white"
 					type="button"
 					[ngClass]="{
-						'cursor-not-allowed opacity-50': !username || !password
+						'cursor-not-allowed opacity-50':
+							!firstName || !lastName || !username || !password
 					}"
-					(click)="login(); $event.preventDefault()"
+					(click)="register(); $event.preventDefault()"
 				>
-					Login
+					Register
 				</button>
 			</form>
-			<!-- link to direct to register page -->
+			<!-- link to direct to login page -->
 			<div class="text-center mt-4">
-				<span class="text-gray-900">Don't have an account?</span>
+				<span class="text-gray-900">Already have an account?</span>
 				<a
-					routerLink="/register"
-					class="text-blue-600 font-semibold px-2"
-					routerLink="/register"
-					>Register</a
+					class="text-blue-950 hover:text-blue-900"
+					routerLink="/login"
 				>
+					Login
+				</a>
 			</div>
 		</div>
 	</div>
