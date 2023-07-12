@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './store/store';
 
 import { AppComponent } from './app.component';
 
@@ -73,6 +75,9 @@ const routes: Routes = [
 		RouterModule.forRoot(routes),
 		FormsModule,
 		BrowserAnimationsModule,
+		StoreModule.forRoot({ auth: authReducer }),
+		StoreModule.forRoot({}, {}),
+		// StoreModule.forFeature('auth', authReducer),
 	],
 	providers: [],
 	bootstrap: [AppComponent],
