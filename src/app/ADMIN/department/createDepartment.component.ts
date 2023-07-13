@@ -3,11 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from '../../models/department';
 import { Faculty } from '../../models/faculty';
 
-import { DepartmentAPI } from 'src/app/shared/departmentApi';
-import { FacultyAPI } from 'src/app/shared/facultyAPI';
-import { FileAPI } from 'src/app/shared/fileAPI';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { API } from '../../shared/api';
 
 @Component({
 	selector: 'app-department',
@@ -16,9 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CreateDepartmentComponent implements OnInit {
 	title = 'Department';
 	private id: number;
-	private departmentAPI: DepartmentAPI = new DepartmentAPI();
-	private facultyAPI: FacultyAPI = new FacultyAPI();
-	private fileAPI: FileAPI = new FileAPI();
 	public department: Department;
 	public hods: Faculty[] = [];
 	public image: File;
@@ -28,41 +24,53 @@ export class CreateDepartmentComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private http: HttpClient
+		private http: HttpClient,
+		private api: API
 	) {
 		this.department = new Department(0, '', '', 0, '', 0);
 		this.image = new File([], '');
 	}
 
 	ngOnInit(): void {
+		this.getHODs();
 		this.id = this.route.snapshot.params['id'];
 		if (this.id != null) {
 			this.activeButtonAction = 'update';
 			this.getDepartment();
 		}
-		this.getHODs();
 	}
 
 	async getDepartment() {
-		await this.departmentAPI
-			.getDepartment(this.http, this.id)
+		await this.api
+			.getCallById('department', this.http, this.id)
 			.then((response: Department) => {
 				this.department = response;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		if (this.department.imageId != null) {
-			await this.fileAPI
-				.getFile(this.http, this.department.imageId)
+			await this.api
+				.getCallById('file', this.http, this.department.imageId)
 				.then((response: File) => {
 					this.image = response;
+				})
+				.catch((error) => {
+					console.log(error);
 				});
 		}
 	}
 
 	async getHODs() {
-		await this.facultyAPI.getFaculties(this.http).then((response: any) => {
-			this.hods = response;
-		});
+		await this.api
+			.getCall('lecturer', this.http)
+			.then((response: any) => {
+				this.hods = response;
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}
 
 	onFileSelected(event: any) {
@@ -74,16 +82,34 @@ export class CreateDepartmentComponent implements OnInit {
 		this.buttonActive = false;
 		let formData = new FormData();
 		formData.append('file', this.image);
-		await this.fileAPI
-			.createFile(this.http, formData)
+		// await this.fileAPI
+		// 	.createFile(this.http, formData)
+		// 	.then((response: any) => {
+		// 		this.department.imageId = response.id;
+		// 	});
+
+		await this.api
+			.postCall('file', this.http, formData)
 			.then((response: any) => {
 				this.department.imageId = response.id;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
-		await this.departmentAPI
-			.createDepartment(this.http, this.department)
+		// await this.departmentAPI
+		// 	.createDepartment(this.http, this.department)
+		// 	.then((response: any) => {
+		// 		console.log(response);
+		// 	});
+
+		await this.api
+			.postCall('department', this.http, this.department)
 			.then((response: any) => {
 				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		alert('Department Created Successfully');
@@ -95,16 +121,35 @@ export class CreateDepartmentComponent implements OnInit {
 		let formData = new FormData();
 		formData.append('file', this.image);
 		if (this.image != null) {
-			await this.fileAPI
-				.createFile(this.http, formData)
+			// await this.fileAPI
+			// 	.createFile(this.http, formData)
+			// 	.then((response: any) => {
+			// 		this.department.imageId = response.id;
+			// 	});
+
+			await this.api
+				.postCall('file', this.http, formData)
 				.then((response: any) => {
 					this.department.imageId = response.id;
+				})
+				.catch((error) => {
+					console.log(error);
 				});
 		}
-		await this.departmentAPI
-			.updateDepartment(this.http, this.department)
+
+		// await this.departmentAPI
+		// 	.updateDepartment(this.http, this.department)
+		// 	.then((response: any) => {
+		// 		console.log(response);
+		// 	});
+
+		await this.api
+			.putCall('department', this.http, this.department)
 			.then((response: any) => {
 				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		alert('Department Updated Successfully');
@@ -112,10 +157,19 @@ export class CreateDepartmentComponent implements OnInit {
 	}
 
 	async deleteDepartment() {
-		await this.departmentAPI
-			.deleteDepartment(this.http, this.department.id)
+		// await this.departmentAPI
+		// 	.deleteDepartment(this.http, this.department.id)
+		// 	.then((response: any) => {
+		// 		console.log(response);
+		// 	});
+
+		await this.api
+			.deleteCall('department', this.http, this.department.id)
 			.then((response: any) => {
 				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		alert('Department Deleted Successfully');

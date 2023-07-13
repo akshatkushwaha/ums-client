@@ -3,30 +3,46 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Department } from 'src/app/models/department';
 import { Faculty } from 'src/app/models/faculty';
 
-import { FacultyAPI } from 'src/app/shared/facultyAPI';
+import { API } from 'src/app/shared/api';
 
 @Component({
-  selector: 'app-department-card',
-  templateUrl: './departmentCard.component.html',
+	selector: 'app-department-card',
+	templateUrl: './departmentCard.component.html',
 })
 export class DepartmentCardComponent implements OnInit {
-  @Input() department: Department;
-  hod: Faculty;
-  facultyApi = new FacultyAPI();
+	@Input() department: Department;
+	hod: Faculty;
+	api = new API();
 
-  constructor(private http: HttpClient) {
-    this.hod = new Faculty(0, '', '', '', '', '', '', 0, new Date(), 0, '', 0);
-  }
+	constructor(private http: HttpClient) {
+		this.hod = new Faculty(
+			0,
+			'',
+			'',
+			'',
+			'',
+			'',
+			'',
+			0,
+			new Date(),
+			0,
+			'',
+			0
+		);
+	}
 
-  ngOnInit() {
-    this.getHOD();
-  }
+	ngOnInit() {
+		this.getHOD();
+	}
 
-  async getHOD() {
-    await this.facultyApi
-      .getFaculty(this.http, this.department.hodId)
-      .then((response: Faculty) => {
-        this.hod = response;
-      });
-  }
+	async getHOD() {
+		await this.api
+			.getCallById('faculties', this.http, this.department.hodId)
+			.then((response) => {
+				this.hod = response;
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
 }

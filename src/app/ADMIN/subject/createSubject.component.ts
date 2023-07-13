@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/models/department';
 import { Subject } from 'src/app/models/subject';
 
-import { DepartmentAPI } from 'src/app/shared/departmentApi';
-import { SubjectAPI } from 'src/app/shared/subjectAPI';
+import { API } from 'src/app/shared/api';
 
 @Component({
 	selector: 'create-subject',
@@ -14,10 +13,8 @@ export class CreateSubjectComponent implements OnInit {
 	public title: string = 'Create Subject';
 	public subject: Subject;
 	public departments: Department[];
-	private departmentApi = new DepartmentAPI();
-	private subjectApi = new SubjectAPI();
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private api: API) {
 		this.subject = new Subject(0, '', 0, '', 0, '');
 	}
 
@@ -26,16 +23,30 @@ export class CreateSubjectComponent implements OnInit {
 	}
 
 	async getDepartments() {
-		await this.departmentApi.getDepartments(this.http).then((response) => {
-			this.departments = response;
-		});
+		await this.api
+			.getCall('department', this.http)
+			.then((response) => {
+				this.departments = response;
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}
 
 	async createSubject() {
-		await this.subjectApi
-			.createSubject(this.http, this.subject)
+		// await this.subjectApi
+		// 	.createSubject(this.http, this.subject)
+		// 	.then((response) => {
+		// 		this.subject = response;
+		// 	});
+
+		await this.api
+			.postCall('subject', this.http, this.subject)
 			.then((response) => {
 				this.subject = response;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		if (this.subject.id > 0) {

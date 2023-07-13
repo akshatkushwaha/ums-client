@@ -8,10 +8,7 @@ import { Faculty } from '../models/faculty';
 import { Student } from '../models/student';
 import { Subject } from '../models/subject';
 
-import { DepartmentAPI } from '../shared/departmentApi';
-import { FacultyAPI } from '../shared/facultyAPI';
-import { StudentAPI } from '../shared/studentAPI';
-import { SubjectAPI } from '../shared/subjectAPI';
+import { API } from '../shared/api';
 
 @Component({
 	selector: 'app-department-details',
@@ -19,16 +16,16 @@ import { SubjectAPI } from '../shared/subjectAPI';
 })
 export class DepartmentDetailsComponent implements OnInit {
 	private id: number;
-	private departmentAPI: DepartmentAPI = new DepartmentAPI();
-	private facultyAPI: FacultyAPI = new FacultyAPI();
-	private studentAPI: StudentAPI = new StudentAPI();
-	private subjectAPI: SubjectAPI = new SubjectAPI();
 	public department: Department;
 	public hod: Faculty;
 	public students: Student[] = [];
 	public activeTab: string = 'students';
 
-	constructor(private route: ActivatedRoute, private http: HttpClient) {
+	constructor(
+		private route: ActivatedRoute,
+		private http: HttpClient,
+		private api: API
+	) {
 		this.hod = new Faculty(
 			0,
 			'',
@@ -52,10 +49,13 @@ export class DepartmentDetailsComponent implements OnInit {
 	}
 
 	async getDepartment() {
-		await this.departmentAPI
-			.getDepartment(this.http, this.id)
+		await this.api
+			.getCallById('department', this.http, this.id)
 			.then((response: Department) => {
 				this.department = response;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		this.getHOD();
@@ -63,21 +63,26 @@ export class DepartmentDetailsComponent implements OnInit {
 	}
 
 	async getHOD() {
-		const facultyAPI = new FacultyAPI();
-		await facultyAPI
-			.getFaculty(this.http, this.department.hodId)
+		await this.api
+			.getCallById('faculty', this.http, this.department.hodId)
 			.then((response: Faculty) => {
 				this.hod = response;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 	}
 
 	async getFacultys() {}
 
 	async getStudents() {
-		await this.studentAPI
-			.getStudentsByDepartment(this.http, this.id)
+		await this.api
+			.getCallById('students', this.http, this.id)
 			.then((response: Student[]) => {
 				this.students = response;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 
 		this.students.sort((a, b) => a.firstName.localeCompare(b.firstName));

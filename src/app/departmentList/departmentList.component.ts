@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { DepartmentAPI } from '../shared/departmentApi';
 import { Department } from '../models/department';
+import { API } from '../shared/api';
 
 @Component({
 	selector: 'app-department-list',
@@ -10,7 +10,7 @@ import { Department } from '../models/department';
 })
 export class DepartmentListComponent implements OnInit {
 	departments: Department[];
-	departmentApi = new DepartmentAPI();
+	api = new API();
 
 	constructor(private http: HttpClient) {
 		this.departments = [];
@@ -21,10 +21,13 @@ export class DepartmentListComponent implements OnInit {
 	}
 
 	async getDepartments() {
-		await this.departmentApi
-			.getDepartments(this.http)
-			.then((response: Department[]) => {
+		await this.api
+			.getCall('department', this.http)
+			.then((response) => {
 				this.departments = response;
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 		this.departments.sort((a, b) => a.name.localeCompare(b.name));
 	}

@@ -20,27 +20,86 @@ export class API {
 		};
 	}
 
-	public getCall(path: string, http: HttpClient) {
-		return http.get(`${this.API_URL}/${path}`, this.authHearder);
+	public getCall(path: string, http: HttpClient): Promise<any> {
+		return new Promise((resolve, reject) => {
+			http.get(`${this.API_URL}/${path}`, this.authHearder).subscribe({
+				next: (response: any) => resolve(response),
+				error: (error) => reject(error),
+			});
+		});
 	}
 
-	public getCallWithQuery(path: string, http: HttpClient, query: string) {
-		return http.get(`${this.API_URL}/${path}?${query}`, this.authHearder);
+	public getCallWithQuery(
+		path: string,
+		http: HttpClient,
+		query: string
+	): Promise<any> {
+		return new Promise((resolve, reject) => {
+			http.get(
+				`${this.API_URL}/${path}?${query}`,
+				this.authHearder
+			).subscribe({
+				next: (response: any) => resolve(response),
+				error: (error) => reject(error),
+			});
+		});
 	}
 
-	public getCallById(path: string, http: HttpClient, id: number) {
-		return http.get(`${this.API_URL}/${path}/${id}`, this.authHearder);
+	public getCallById(
+		path: string,
+		http: HttpClient,
+		id: number
+	): Promise<any> {
+		return new Promise((resolve, reject) => {
+			http.get(
+				`${this.API_URL}/${path}/${id}`,
+				this.authHearder
+			).subscribe({
+				next: (response: any) => resolve(response),
+				error: (error) => reject(error),
+			});
+		});
 	}
 
-	public postCall(path: string, http: HttpClient, body: any) {
-		return http.post(`${this.API_URL}/${path}`, body, this.authHearder);
+	public postCall(path: string, http: HttpClient, body: any): Promise<any> {
+		return new Promise((resolve, reject) => {
+			http.post(
+				`${this.API_URL}/${path}`,
+				body,
+				this.authHearder
+			).subscribe({
+				next: (response: any) => resolve(response),
+				error: (error) => reject(error),
+			});
+		});
 	}
 
-	public putCall(path: string, http: HttpClient, body: any) {
-		return http.put(`${this.API_URL}/${path}`, body, this.authHearder);
+	public putCall(path: string, http: HttpClient, body: any): Promise<any> {
+		return new Promise((resolve, reject) => {
+			http.put(
+				`${this.API_URL}/${path}`,
+				body,
+				this.authHearder
+			).subscribe({
+				next: (response: any) => resolve(response),
+				error: (error) => reject(error),
+			});
+		});
 	}
 
-	public deleteCall(path: string, http: HttpClient, id: number) {
-		return http.delete(`${this.API_URL}/${path}/${id}`, this.authHearder);
+	public deleteCall(
+		path: string,
+		http: HttpClient,
+		id: number
+	): Promise<any> {
+		return new Promise((resolve, reject) => {
+			http.delete(
+				`${this.API_URL}/${path}/${id}`,
+				this.authHearder
+			).subscribe({
+				next: (response: any) => resolve(response),
+				error: (error) => reject(error),
+			});
+		});
 	}
 }
