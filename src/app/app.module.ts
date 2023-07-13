@@ -78,8 +78,9 @@ const routes: Routes = [
 		FormsModule,
 		BrowserAnimationsModule,
 		ToastrModule.forRoot({
-			timeOut: 2000,
+			timeOut: 5000,
 			positionClass: 'toast-top-right',
+			newestOnTop: true,
 			preventDuplicates: true,
 			progressBar: true,
 		}),
