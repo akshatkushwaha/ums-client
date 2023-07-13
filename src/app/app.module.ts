@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { authReducer } from './store/store';
 
@@ -76,6 +77,12 @@ const routes: Routes = [
 		RouterModule.forRoot(routes),
 		FormsModule,
 		BrowserAnimationsModule,
+		ToastrModule.forRoot({
+			timeOut: 2000,
+			positionClass: 'toast-top-right',
+			preventDuplicates: true,
+			progressBar: true,
+		}),
 		StoreModule.forRoot({ auth: authReducer }),
 	],
 	providers: [],

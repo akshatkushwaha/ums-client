@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import { AuthState, login } from 'src/app/store/store';
 
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private https: HttpClient,
 		private router: Router,
-		private store: Store<{ auth: AuthState }>
+		private store: Store<{ auth: AuthState }>,
+		private toastr: ToastrService
 	) {}
 
 	ngOnInit() {}
@@ -68,6 +70,7 @@ export class LoginComponent implements OnInit {
 			})
 			.catch((error) => {
 				console.log(error);
+				this.toastr.error(error.error.message, 'Login failed');
 			});
 	}
 }

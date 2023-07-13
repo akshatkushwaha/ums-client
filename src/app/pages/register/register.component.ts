@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import { AuthState, login } from 'src/app/store/store';
 
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
 	constructor(
 		private https: HttpClient,
 		private router: Router,
-		private store: Store<{ auth: AuthState }>
+		private store: Store<{ auth: AuthState }>,
+		private toastr: ToastrService
 	) {}
 
 	ngOnInit(): void {}
@@ -75,6 +77,9 @@ export class RegisterComponent implements OnInit {
 				this.lastName = '';
 
 				this.router.navigate(['/departments']);
+			})
+			.catch((error) => {
+				this.toastr.error(error.error.message, 'Error');
 			});
 	}
 }
