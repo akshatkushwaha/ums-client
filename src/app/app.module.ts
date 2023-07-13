@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { authReducer } from './store/store';
 
 import { AppComponent } from './app.component';
@@ -27,7 +29,6 @@ import { CreateDepartmentComponent } from './ADMIN/department/createDepartment.c
 import { CreateFacultyComponent } from './ADMIN/faculty/createFaculty.component';
 import { CreateStudentComponent } from './ADMIN/student/createStudent.component';
 import { CreateSubjectComponent } from './ADMIN/subject/createSubject.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/departments', pathMatch: 'full' },
@@ -76,8 +77,6 @@ const routes: Routes = [
 		FormsModule,
 		BrowserAnimationsModule,
 		StoreModule.forRoot({ auth: authReducer }),
-		StoreModule.forRoot({}, {}),
-		// StoreModule.forFeature('auth', authReducer),
 	],
 	providers: [],
 	bootstrap: [AppComponent],
