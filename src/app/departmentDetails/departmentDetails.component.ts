@@ -20,12 +20,11 @@ export class DepartmentDetailsComponent implements OnInit {
 	public hod: Faculty;
 	public students: Student[] = [];
 	public activeTab: string = 'students';
+	private api = new API();
 
-	constructor(
-		private route: ActivatedRoute,
-		private http: HttpClient,
-		private api: API
-	) {
+	constructor(private route: ActivatedRoute, private http: HttpClient) {
+		this.id = this.route.snapshot.params['id'];
+		console.log(this.id);
 		this.hod = new Faculty(
 			0,
 			'',
@@ -77,7 +76,7 @@ export class DepartmentDetailsComponent implements OnInit {
 
 	async getStudents() {
 		await this.api
-			.getCallById('students', this.http, this.id)
+			.getCallWithQuery('student', this.http, `departmentId=${this.id}`)
 			.then((response: Student[]) => {
 				this.students = response;
 			})
@@ -86,6 +85,7 @@ export class DepartmentDetailsComponent implements OnInit {
 			});
 
 		this.students.sort((a, b) => a.firstName.localeCompare(b.firstName));
+		console.log(this.students);
 	}
 
 	async getSubjects() {}

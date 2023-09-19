@@ -1,128 +1,135 @@
-<div
-  *ngIf="department != undefined && hod != undefined"
-  class="mx-auto container mt-24"
->
-  <div class="text-center pb-10">
-    <h1 class="text-4xl font-bold">Department Details</h1>
-  </div>
-  <div class="bg-gray-200 rounded-2xl p-5">
-    <div class="text-center">
-      <h1 class="text-4xl font-bold">{{ department.name }}</h1>
-    </div>
-    <div class="grid grid-cols-6 gap-4 pt-5">
-      <div class="flex flex-col col-span-2" *ngIf="hod">
-        <img
-          class="w-96 h-96 rounded-full mx-auto"
-          src="http://localhost:8080/api/v1/file/{{ hod.profilePictureId }}"
-          [alt]="department.name"
-        />
-        <h1 class="text-center text-xl font-bold pt-5">
-          {{ hod.firstName }} {{ hod.lastName }}
-        </h1>
-        <h1 class="text-center text-xl font-bold">{{ hod.email }}</h1>
-        <h1 class="text-center text-xl font-bold">
-          {{ hod.phoneNumber }}
-        </h1>
-      </div>
-      <div class="flex flex-col justify-between col-span-4">
-        <div>
-          <div class="flex flex-row pt-4">
-            <h1 class="text-xl font-bold pr-4">Department Code :</h1>
-            <h1 class="text-xl font-bold pr-4">
-              {{ department.abbreviation }}
-            </h1>
-          </div>
-          <div class="flex flex-row pt-4">
-            <h1 class="text-xl font-bold pr-4">Total Subjects :</h1>
-          </div>
-          <div class="flex flex-row pt-4">
-            <h1 class="text-xl font-bold pr-4">Enrolled Students :</h1>
-          </div>
-          <div class="flex flex-row flex-wrap pt-4">
-            <h1 class="text-xl font-bold pr-4">Description</h1>
-            <h1 class="text-lg text-justify px-10">
-              {{ department.description }}
-            </h1>
-          </div>
-        </div>
-        <div class="w-full text-end">
-          <button
-            routerLink="/admin/create/department/{{ department.id }}"
-            class="bg-blue-950 text-white rounded-lg px-4 py-2"
-          >
-            Edit Details
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="bg-blue-950 rounded-lg mt-10">
-    <ul class="flex flex-row justify-center">
-      <li class="text-center text-white text-lg font-bold py-4 px-4">
-        <button
-          class="hover:bg-white hover:text-blue-950 rounded-lg px-4 py-2"
-          [ngClass]="{
-            'bg-white': activeTab == 'subjects',
-            'text-blue-950': activeTab == 'subjects'
-          }"
-          (click)="changeTab('subjects')"
-        >
-          Subjects
-        </button>
-      </li>
-      <li class="text-center text-white text-lg font-bold py-4 px-4">
-        <button
-          class="hover:bg-white hover:text-blue-950 rounded-lg px-4 py-2"
-          [ngClass]="{
-            'bg-white': activeTab == 'students',
-            'text-blue-950': activeTab == 'students'
-          }"
-          (click)="changeTab('students')"
-        >
-          Students
-        </button>
-      </li>
-      <li class="text-center text-white text-lg font-bold py-4 px-4">
-        <button
-          class="hover:bg-white hover:text-blue-950 rounded-lg px-4 py-2"
-          [ngClass]="{
-            'bg-white': activeTab == 'teachers',
-            'text-blue-950': activeTab == 'teachers'
-          }"
-          (click)="changeTab('teachers')"
-        >
-          Teachers
-        </button>
-      </li>
-    </ul>
-  </div>
+<div class="mx-auto container mt-24">
+	<!-- *ngIf="department != undefined && hod != undefined" -->
+	<div class="text-center pb-10">
+		<h1 class="text-4xl font-bold">Department Details</h1>
+	</div>
+	<div class="bg-gray-200 rounded-2xl p-5">
+		<div class="text-center">
+			<h1 class="text-4xl font-bold">{{ department.name }}</h1>
+		</div>
+		<div class="grid grid-cols-6 gap-4 pt-5">
+			<div class="flex flex-col col-span-2" *ngIf="hod">
+				<img
+					class="w-96 h-96 rounded-full mx-auto"
+					src="http://localhost:8080/api/v1/file/{{ hod.imageUrl }}"
+					[alt]="department.name"
+				/>
+				<h1 class="text-center text-xl font-bold pt-5">
+					{{ hod.firstName }} {{ hod.lastName }}
+				</h1>
+				<h1 class="text-center text-xl font-bold">{{ hod.email }}</h1>
+				<h1 class="text-center text-xl font-bold">
+					{{ hod.phoneNumber }}
+				</h1>
+			</div>
+			<div class="flex flex-col justify-between col-span-4">
+				<div>
+					<div class="flex flex-row pt-4">
+						<h1 class="text-xl font-bold pr-4">
+							Department Code :
+						</h1>
+						<h1 class="text-xl font-bold pr-4">
+							{{ department.abbreviation }}
+						</h1>
+					</div>
+					<div class="flex flex-row pt-4">
+						<h1 class="text-xl font-bold pr-4">Total Subjects :</h1>
+					</div>
+					<div class="flex flex-row pt-4">
+						<h1 class="text-xl font-bold pr-4">
+							Enrolled Students :
+						</h1>
+					</div>
+					<div class="flex flex-row flex-wrap pt-4">
+						<h1 class="text-xl font-bold pr-4">Description</h1>
+						<h1 class="text-lg text-justify px-10">
+							{{ department.description }}
+						</h1>
+					</div>
+				</div>
+				<div class="w-full text-end">
+					<button
+						routerLink="/admin/create/department/{{
+							department.id
+						}}"
+						class="bg-blue-950 text-white rounded-lg px-4 py-2"
+					>
+						Edit Details
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-blue-950 rounded-lg mt-10">
+		<ul class="flex flex-row justify-center">
+			<li class="text-center text-white text-lg font-bold py-4 px-4">
+				<button
+					class="hover:bg-white hover:text-blue-950 rounded-lg px-4 py-2"
+					[ngClass]="{
+						'bg-white': activeTab == 'subjects',
+						'text-blue-950': activeTab == 'subjects'
+					}"
+					(click)="changeTab('subjects')"
+				>
+					Subjects
+				</button>
+			</li>
+			<li class="text-center text-white text-lg font-bold py-4 px-4">
+				<button
+					class="hover:bg-white hover:text-blue-950 rounded-lg px-4 py-2"
+					[ngClass]="{
+						'bg-white': activeTab == 'students',
+						'text-blue-950': activeTab == 'students'
+					}"
+					(click)="changeTab('students')"
+				>
+					Students
+				</button>
+			</li>
+			<li class="text-center text-white text-lg font-bold py-4 px-4">
+				<button
+					class="hover:bg-white hover:text-blue-950 rounded-lg px-4 py-2"
+					[ngClass]="{
+						'bg-white': activeTab == 'teachers',
+						'text-blue-950': activeTab == 'teachers'
+					}"
+					(click)="changeTab('teachers')"
+				>
+					Teachers
+				</button>
+			</li>
+		</ul>
+	</div>
 
-  <div>
-    <!-- Filter -->
-    <div>
-      <div class="flex flex-row justify-end">
-        <div class="flex flex-row items-center">
-          <h1 class="text-xl font-semibold pr-4">Filter :</h1>
-          <select class="rounded-lg px-4 py-2">
-            <option value="all">All</option>
-            <option value="firstYear">First Year</option>
-            <option value="secondYear">Second Year</option>
-            <option value="thirdYear">Third Year</option>
-            <option value="fourthYear">Fourth Year</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="activeTab == 'subjects'">
-      <app-subject-card></app-subject-card>
-    </div>
-    <div *ngIf="activeTab == 'students'">
-      <div *ngFor="let student of students; let i = index">
-        <app-student-card [student]="student" [index]="i"></app-student-card>
-      </div>
-    </div>
-    <div *ngIf="activeTab == 'teachers'">
-      <app-faculty-card></app-faculty-card>
-    </div>
-  </div>
+	<div>
+		<!-- Filter -->
+		<div>
+			<div class="flex flex-row justify-end">
+				<div class="flex flex-row items-center">
+					<h1 class="text-xl font-semibold pr-4">Filter :</h1>
+					<select class="rounded-lg px-4 py-2">
+						<option value="all">All</option>
+						<option value="firstYear">First Year</option>
+						<option value="secondYear">Second Year</option>
+						<option value="thirdYear">Third Year</option>
+						<option value="fourthYear">Fourth Year</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="activeTab == 'subjects'">
+			<app-subject-card></app-subject-card>
+		</div>
+		<div *ngIf="activeTab == 'students'">
+			<div *ngFor="let student of students; let i = index">
+				<app-student-card
+					[student]="student"
+					[index]="i"
+				></app-student-card>
+			</div>
+		</div>
+		<div *ngIf="activeTab == 'teachers'">
+			<app-faculty-card></app-faculty-card>
+		</div>
+	</div>
 </div>

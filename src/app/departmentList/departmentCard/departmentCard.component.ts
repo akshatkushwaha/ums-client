@@ -37,7 +37,7 @@ export class DepartmentCardComponent implements OnInit {
 
 	async getHOD() {
 		await this.api
-			.getCallById('faculties', this.http, this.department.hodId)
+			.getCallById('lecturer', this.http, this.department.hodId)
 			.then((response) => {
 				this.hod = response;
 			})

@@ -13,7 +13,7 @@ import { API } from '../../shared/api';
 	templateUrl: './createDepartment.component.html',
 })
 export class CreateDepartmentComponent implements OnInit {
-	title = 'Department';
+	private api = new API();
 	private id: number;
 	public department: Department;
 	public hods: Faculty[] = [];
@@ -24,10 +24,9 @@ export class CreateDepartmentComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private http: HttpClient,
-		private api: API
+		private http: HttpClient
 	) {
-		this.department = new Department(0, '', '', 0, '', 0);
+		this.department = new Department(0, '', '', 0, '', '');
 		this.image = new File([], '');
 	}
 
@@ -49,17 +48,6 @@ export class CreateDepartmentComponent implements OnInit {
 			.catch((error) => {
 				console.log(error);
 			});
-
-		if (this.department.imageId != null) {
-			await this.api
-				.getCallById('file', this.http, this.department.imageId)
-				.then((response: File) => {
-					this.image = response;
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		}
 	}
 
 	async getHODs() {
@@ -89,19 +77,10 @@ export class CreateDepartmentComponent implements OnInit {
 		// 	});
 
 		await this.api
-			.postCall('file', this.http, formData)
+			.postCall('file/upload', this.http, formData)
 			.then((response: any) => {
-				this.department.imageId = response.id;
-			})
-			.catch((error) => {
-				console.log(error);
+				this.department.imageUrl = response.path;
 			});
-
-		// await this.departmentAPI
-		// 	.createDepartment(this.http, this.department)
-		// 	.then((response: any) => {
-		// 		console.log(response);
-		// 	});
 
 		await this.api
 			.postCall('department', this.http, this.department)
@@ -128,9 +107,9 @@ export class CreateDepartmentComponent implements OnInit {
 			// 	});
 
 			await this.api
-				.postCall('file', this.http, formData)
+				.postCall('file/upload', this.http, formData)
 				.then((response: any) => {
-					this.department.imageId = response.id;
+					this.department.imageUrl = response.path;
 				})
 				.catch((error) => {
 					console.log(error);

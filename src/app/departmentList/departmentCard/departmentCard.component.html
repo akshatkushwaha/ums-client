@@ -1,21 +1,23 @@
 <a routerLink="/department/{{ department.id }}" class="w-full">
-  <div
-    class="h-40 rounded-lg grid grid-cols-3 gap-4 border-2 border-gray-600 cursor-pointer hover:scale-110 transform transition duration-500"
-  >
-    <div class="col-span-1 rounded overflow-hidden">
-      <img
-        src="http://localhost:8080/api/v1/file/{{ department.imageId }}"
-        alt="department image"
-        class="h-full w-full object-cover"
-      />
-    </div>
-    <div class="col-span-2 flex flex-col justify-around">
-      <h1 class="text-xl font-bold text-sky-800">{{ department.name }}</h1>
-      <h2 class="text-xl font-bold">{{ department.abbreviation }}</h2>
-      <h4 class="text-xl font-bold">
-        <span>HOD: </span
-        >{{ hod.firstName + " " + hod.middleName + " " + hod.lastName }}
-      </h4>
-    </div>
-  </div>
+	<figure
+		class="h-40 rounded-lg grid grid-cols-3 gap-4 border-2 border-gray-600 cursor-pointer hover:scale-110 transform transition duration-500"
+	>
+		<img
+			src="http://localhost:8080/api/v1/file/{{ department.imageId }}"
+			alt="{{ department.name }} image"
+			class="h-full w-full object-cover"
+		/>
+		<figcaption class="col-span-2 flex flex-col justify-around">
+			<header>
+				<h1 class="text-xl font-bold text-sky-800">
+					{{ department.name }}
+				</h1>
+				<h2 class="text-xl font-bold">{{ department.abbreviation }}</h2>
+			</header>
+			<h4 class="text-xl font-bold">
+				<span>HOD: </span
+				>{{ hod.firstName + " " + hod.middleName + " " + hod.lastName }}
+			</h4>
+		</figcaption>
+	</figure>
 </a>
